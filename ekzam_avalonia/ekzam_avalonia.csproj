@@ -28,5 +28,6 @@
 
   <ItemGroup>
     <Compile Remove="Data\**\*.cs" />
+    <Compile Remove="ekzam_avalonia.Tests\**\*.cs" />
   </ItemGroup>
 </Project>
