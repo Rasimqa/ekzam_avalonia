@@ -20,8 +20,8 @@
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Npgsql" Version="9.0.2" />
-  </ItemGroup>
-
+  </ItemGroup> 
+ 
   <ItemGroup>
     <AvaloniaResource Include="Assets\Images\**\*.png" />
   </ItemGroup>
