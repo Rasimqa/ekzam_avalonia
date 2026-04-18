@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS collections
+(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS services
+(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
+    price NUMERIC(10, 2) NOT NULL CHECK (price >= 0),
+    collection_id INT NOT NULL REFERENCES collections(id) ON DELETE RESTRICT,
+    last_modified_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    image_path VARCHAR(255) NOT NULL
+);

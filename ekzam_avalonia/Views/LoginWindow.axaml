@@ -1,0 +1,49 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        x:Class="ekzam_avalonia.Views.LoginWindow"
+        mc:Ignorable="d"
+        Width="460"
+        Height="330"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen"
+        SystemDecorations="None"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        Title="Авторизация"
+        Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+  <Grid RowDefinitions="44,*" Margin="0">
+    <Border Grid.Row="0" Background="{DynamicResource SystemControlBackgroundAccentBrush}" PointerPressed="TitleBarPointerPressed">
+      <Grid ColumnDefinitions="Auto,*,Auto,Auto" Margin="12,0">
+        <Image Grid.Column="0" Width="24" Height="24" VerticalAlignment="Center" Source="avares://ekzam_avalonia/Assets/Images/logo-small.png" />
+        <TextBlock Grid.Column="1" Text="Лавка «Матье» - вход" VerticalAlignment="Center" Margin="10,0,0,0" />
+        <Button Grid.Column="2" Content="—" Width="36" Height="30" Margin="0,7,8,7" Click="MinimizeClick" />
+        <Button Grid.Column="3" Content="X" Width="36" Height="30" Margin="0,7,0,7" Click="CloseClick" />
+      </Grid>
+    </Border>
+
+    <Grid Grid.Row="1" Margin="0,16,0,16">
+      <Border Width="360"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Padding="20"
+              CornerRadius="8"
+              BorderThickness="1"
+              BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+              RowSpacing="8">
+          <TextBlock Grid.Row="0" Text="Логин:" />
+          <TextBox Grid.Row="1" Name="loginTextBox" Watermark="Введите логин" />
+          <TextBlock Grid.Row="2" Text="Пароль:" Margin="0,6,0,0" />
+          <TextBox Grid.Row="3" Name="passwordTextBox" PasswordChar="*" Watermark="Введите пароль" />
+          <TextBlock Grid.Row="4" Name="messageTextBlock" Margin="0,8,0,0" TextWrapping="Wrap" />
+          <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="Войти" Width="120" Click="LoginClick" />
+            <Button Content="Выход" Width="120" Margin="8,0,0,0" Click="CloseClick" />
+          </StackPanel>
+        </Grid>
+      </Border>
+    </Grid>
+  </Grid>
+</Window>

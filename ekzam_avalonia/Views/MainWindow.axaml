@@ -1,0 +1,91 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:model="clr-namespace:ekzam_avalonia.Models"
+        x:Class="ekzam_avalonia.Views.MainWindow"
+        mc:Ignorable="d"
+        Width="1280"
+        Height="760"
+        MinWidth="1280"
+        MaxWidth="1280"
+        MinHeight="760"
+        MaxHeight="760"
+        WindowStartupLocation="CenterScreen"
+        SystemDecorations="None"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        Title="Лавка Матье - Услуги"
+        Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+  <Window.Styles>
+    <Style Selector="Button.action">
+      <Setter Property="Height" Value="34"/>
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    </Style>
+  </Window.Styles>
+  <Grid RowDefinitions="44,*" Margin="0">
+    <Border Grid.Row="0" Background="{DynamicResource SystemControlBackgroundAccentBrush}" PointerPressed="TitleBarPointerPressed">
+      <Grid ColumnDefinitions="Auto,*,Auto,Auto" Margin="12,0">
+        <Image Grid.Column="0" Width="24" Height="24" VerticalAlignment="Center" Source="avares://ekzam_avalonia/Assets/Images/logo-small.png" />
+        <TextBlock Grid.Column="1" Name="titleTextBlock" VerticalAlignment="Center" Margin="10,0,0,0" />
+        <Button Grid.Column="2" Content="—" Width="36" Height="30" Margin="0,7,8,7" Click="MinimizeClick" />
+        <Button Grid.Column="3" Content="X" Width="36" Height="30" Margin="0,7,0,7" Click="CloseClick" />
+      </Grid>
+    </Border>
+
+    <Grid Grid.Row="1" ColumnDefinitions="220,*,190" Margin="12">
+      <StackPanel Grid.Column="0" Spacing="12">
+        <Border BorderThickness="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}" CornerRadius="4" Height="140" Padding="8">
+          <Image Source="avares://ekzam_avalonia/Assets/Images/logo.png" Stretch="Uniform"/>
+        </Border>
+        <Button Classes="action" Content="Сортировать А-Я" Click="SortClick"/>
+        <Button Classes="action" Content="Добавить" Click="AddClick"/>
+        <Button Classes="action" Content="Редактировать" Click="EditClick"/>
+        <Button Classes="action" Content="Удалить" Click="DeleteClick"/>
+        <Button Classes="action" Content="Выход" Click="LogoutClick"/>
+        <TextBlock Name="statusTextBlock" TextWrapping="Wrap" Margin="0,4,0,0"/>
+      </StackPanel>
+
+      <Grid Grid.Column="1" RowDefinitions="Auto,*,Auto" Margin="14,0,14,0">
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button Name="customButton" Content="Костюм" Width="130" Click="CustomFilterClick"/>
+          <Button Name="cosplayButton" Content="Косплей" Width="130" Click="CosplayFilterClick"/>
+          <Button Name="allButton" Content="Все" Width="100" Click="AllFilterClick"/>
+        </StackPanel>
+
+        <ListBox Grid.Row="1" Name="servicesListBox" Margin="0,8,0,8" SelectionMode="Single">
+          <ListBox.ItemTemplate>
+            <DataTemplate x:DataType="model:ServiceItem">
+              <Border BorderThickness="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}" Margin="0,0,0,10" Padding="10" CornerRadius="4">
+                <Grid ColumnDefinitions="160,*">
+                  <Border Width="140" Height="110" BorderThickness="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+                    <Image Source="{Binding ImageBitmap}" Stretch="UniformToFill"/>
+                  </Border>
+                  <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="0,0,0,6"/>
+                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="0,0,0,6"/>
+                    <TextBlock Text="{Binding Price, StringFormat='Цена: {0:F2} руб.'}" />
+                    <TextBlock Text="{Binding LastModifiedDate, StringFormat='Изменено: {0:dd.MM.yyyy HH:mm}'}" />
+                  </StackPanel>
+                </Grid>
+              </Border>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+
+        <TextBlock Grid.Row="2" Name="pageTextBlock" HorizontalAlignment="Right"/>
+      </Grid>
+
+      <StackPanel Grid.Column="2" Spacing="8">
+        <TextBlock Text="Поиск"/>
+        <TextBox Name="searchTextBox" Watermark="Название услуги" TextChanged="SearchTextChanged"/>
+        <TextBlock Text="Коллекция"/>
+        <ComboBox Name="collectionFilterComboBox" SelectionChanged="CollectionFilterChanged"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+          <Button Name="prevButton" Content="⬅" Width="72" Height="34" Click="PrevPageClick"/>
+          <Button Name="nextButton" Content="➡" Width="72" Height="34" Margin="8,0,0,0" Click="NextPageClick"/>
+        </StackPanel>
+      </StackPanel>
+    </Grid>
+  </Grid>
+</Window>
